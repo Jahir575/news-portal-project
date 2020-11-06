@@ -1,0 +1,195 @@
+{% extends 'pages/base.html' %}
+{% block latest %}
+
+<section id="newsSection">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="latest_newsarea"> <span>Latest News</span>
+          <ul id="ticker01" class="news_sticker">
+            {% for n in news_list %}
+            <li><a href="{% url 'details' n.id %}"><img src="{{ n.image.url }}" alt="">{{n.title}}</a></li>
+            {% endfor %}
+          </ul>
+          <div class="social_area">
+            <ul class="social_nav">
+              <li class="facebook"><a href="#"></a></li>
+              <li class="twitter"><a href="#"></a></li>
+              <li class="flickr"><a href="#"></a></li>
+              <li class="pinterest"><a href="#"></a></li>
+              <li class="googleplus"><a href="#"></a></li>
+              <li class="vimeo"><a href="#"></a></li>
+              <li class="youtube"><a href="#"></a></li>
+              <li class="mail"><a href="#"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %}
+
+  {% block content %}
+  <section id="sliderSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="slick_slider">
+        {% for n in newsslide %}
+         <div class="single_iteam"> <a href="{% url 'details' n.id %}"> <img src="{{ n.image.url }}" alt=""></a>
+            <div class="slider_article">
+              {% for m in messages %}
+              {{m}}
+              {% endfor %}
+              <h2><a class="slider_tittle" href="{% url 'details' n.id %}">{{ n.title }}</a></h2>
+              <p>{{n.description|truncatechars:150}}</p>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="latest_post">
+        <h2><span>Latest post</span></h2>
+        <div class="latest_post_container">
+          <div id="prev-button"><i class="fa fa-chevron-up"></i></div>
+          <ul class="latest_postnav">
+        {% for n in latestnews %}
+              <li>
+                <div class="media"> <a href="{% url 'details' n.id %}" class="media-left"> <img alt="" src="{{ n.image.url }}"> </a>
+                  <div class="media-body"> <a href="{% url 'details' n.id %}" class="catg_title"> {{ n.title }}</a> </div>
+                </div>
+              </li>
+        {% endfor %}
+          </ul>
+        <div id="next-button"><i class="fa fa-chevron-down"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+  
+  <section id="contentSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">      
+        <div class="left_content">
+          <div class="single_post_content">
+            <h2><span>National</span></h2>
+              <div class="single_post_content_left">
+                <ul class="business_catgnav  wow fadeInDown">
+                  <li>
+                    <figure class="bsbig_fig"> <a href="{% url 'details' nationaltop.0.id %}" class="featured_img"> <img alt="" src="{{ nationaltop.0.image.url }}"> <span class="overlay"></span> </a>
+                    <figcaption> <a href="{% url 'details' nationaltop.0.id %}">{{nationaltop.0.title}}</a> </figcaption>
+                    <p>{{ nationaltop.0.description|truncatechars:200 }}</p>
+                    </figure>
+                  </li>
+                </ul>
+              </div>
+              <div class="single_post_content_right">
+              <ul>
+             {% for n in national %}
+                <li>
+                  <div class="media wow fadeInDown"> <a href="{% url 'details' n.id %}" class="media-left"> <img alt="" src="{{ n.image.url }}"> </a>
+                    <div class="media-body"> <a href="{% url 'details' n.id %}" class="catg_title"> {{ n.title }}</a> </div>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul >
+            </div>
+            </div>
+           
+            
+            <div class="fashion_technology_area">
+              <div class="fashion">
+                <div class="single_post_content">
+                  <h2><span>International</span></h2>
+                  <ul class="business_catgnav wow fadeInDown">
+                    <li>
+                        <figure class="bsbig_fig"> <a href="{% url 'details' Internationaltop.0.id %}" class="featured_img"> <img alt="" src="{{ Internationaltop.0.image.url }}"> <span class="overlay"></span> </a>
+                          <figcaption> <a href="{% url 'details' Internationaltop.0.id %}">{{ Internationaltop.0.title }}</a> </figcaption>
+                          <p>{{ Internationaltop.0.description|truncatechars:200 }}</p>
+                        </figure>
+                    </li>
+                  </ul>
+                 
+                  <ul class="spost_nav">
+                  {% for n in International %}
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="{% url 'details' n.id %}" class="media-left"> <img alt="" src="{{n.image.url}}"> </a>
+                      <div class="media-body"> <a href="{% url 'details' n.id %}" class="catg_title"> {{ n.title }}</a> </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+                 
+                  <div class="technology">
+                    <div class="single_post_content">
+                      <h2><span>Technology</span></h2>
+                      <ul class="business_catgnav">
+                  <li>
+                    <figure class="bsbig_fig wow fadeInDown"> <a href="{% url 'details' Technologytop.0.id %}" class="featured_img"> <img alt="" src="{{ Technologytop.0.image.url }}"> <span class="overlay"></span> </a>
+                      <figcaption> <a href="{% url 'details' Technologytop.0.id %}">{{ Technologytop.0.title }}</a> </figcaption>
+                      <p>{{ Technologytop.0.description|truncatechars:200 }}</p>
+                    </figure>
+                  </li>
+                </ul>
+                  
+                  <ul class="spost_nav">
+                  {% for n in Technology %}
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="{% url 'details' n.id %}" class="media-left"> <img alt="" src="{{ n.image.url }}"> </a>
+                      <div class="media-body"> <a href="{% url 'details' n.id %}" class="catg_title"> {{ n.title }}</a> </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+                
+            <div class="single_post_content">
+              <h2><span>Photography</span></h2>
+                <ul class="photograph_nav  wow fadeInDown">
+                  {% for n in Film %}
+                  <li>
+                    <div class="photo_grid">
+                    <figure class="effect-layla"> <a class="fancybox-buttons" data-fancybox-group="button" href="{{ n.image.url }}" title="{{ n.title }}"> <img src="{{ n.image.url }}" alt=""/></a> </figure>
+                  </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+            </div>         
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <aside class="right_content">
+          <div class="single_sidebar">
+            <h2><span>Popular Post</span></h2>
+            <ul class="spost_nav">
+              {% for n in newsslide %}
+              <li> 
+                <div class="media wow fadeInDown"> <a href="{% url 'details' n.id %}" class="media-left"> <img alt="" src="{{n.image.url}}"> </a>
+                  <div class="media-body"> <a href="{% url 'details' n.id %}" class="catg_title"> {{ n.title }}</a> </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>+9
+          <div class="single_sidebar wow fadeInDown">
+            <h2><span>Sponsor</span></h2>
+            <a class="sideAdd" href="#"><img src="images/add_img.jpg" alt=""></a> </div>
+          <div class="single_sidebar wow fadeInDown">
+            <h2><span>Links</span></h2>
+            <ul>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Rss Feed</a></li>
+              <li><a href="#">Login</a></li>
+              <li><a href="#">Life &amp; Style</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+              {% endblock %}

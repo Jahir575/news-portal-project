@@ -1,0 +1,23 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date & Time</th>
+        </tr>
+    </thead>
+    {% for news in news_list %}
+    <tbody>
+        <tr>
+            <td><a class="badge-secondary" href="{% url 'details' news.id %}">{{ news.title }}</a></td>
+            <td>{{ news.author }}</td>
+            <td>{{ news.date }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

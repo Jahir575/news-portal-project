@@ -1,0 +1,58 @@
+{% extends 'pages/base.html' %}
+
+{% block latest %}
+<section id="newsSection">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="latest_newsarea"> <span>Latest News</span>
+          <ul id="ticker01" class="news_sticker">
+            {% for n in news_list %}
+            <li><a href="{% url 'details' n.id %}"><img src="{{ n.image.url }}" alt="">{{n.title}}</a></li>
+            {% endfor %}
+          </ul>
+          <div class="social_area">
+            <ul class="social_nav">
+              <li class="facebook"><a href="#"></a></li>
+              <li class="twitter"><a href="#"></a></li>
+              <li class="flickr"><a href="#"></a></li>
+              <li class="pinterest"><a href="#"></a></li>
+              <li class="googleplus"><a href="#"></a></li>
+              <li class="vimeo"><a href="#"></a></li>
+              <li class="youtube"><a href="#"></a></li>
+              <li class="mail"><a href="#"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %}
+
+  {% block content %}
+    <section id="contentSection">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">      
+              <div class="single_post_content">
+                <ol class="breadcrumb">
+                  <li><a href="{% url 'home' %}">Home</a></li>
+                  <li><a class="active">{{ all_category_news.0.category }}</a></li>
+        
+                </ol>
+                <ul class="business_catgnav  wow fadeInDown">
+                            {% for n in all_category_news %}
+                            <li>
+                            <figure class="bsbig_fig"> <a href="{% url 'details' n.id %}" class="featured_img"> <img alt="" src="{{ n.image.url }}"> <span class="overlay"></span> </a>
+                            <figcaption> <a href="{% url 'details' n.id %}">{{n.title}}</a> </figcaption>
+                            <p>{{ n.description|truncatechars:200 }}</p>
+                            </figure>
+                            </li>
+                            {% endfor %}
+                </ul>
+
+                </div>
+ 
+            </div>
+        </div>
+    </section>
+
+  {% endblock %}

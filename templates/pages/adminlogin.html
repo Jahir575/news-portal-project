@@ -1,0 +1,14 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+<div style="display: block; margin: auto; padding-top: 50px; margin-top: 50px; margin-bottom: 50px; width: 50%;">
+<form method="POST" action="/adminauth/">
+    {% csrf_token %}
+    <input placeholder="username" name="username" type="text" class="form-control" style="display: block; margin: auto; margin-bottom: 20px; width: 50%;">
+    <input type="password" placeholder="password" name="password" class="form-control" style="display: block; margin: auto; margin-bottom: 20px; width: 50%;">
+    <input type="submit" value="Login" class="btn btn-success" style="display: block; margin: auto; margin-bottom: 20px; width: 50%;">
+</form>
+{% for m in messages %}
+{{m}}
+{% endfor %}
+</div>
+{% endblock %}
