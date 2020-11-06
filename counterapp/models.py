@@ -15,7 +15,6 @@ class EmployeeModel(models.Model):
 class NewsData(models.Model):
     title = models.CharField('News Title', max_length = 120)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    author = models.ForeignKey(EmployeeModel, default=1, on_delete=models.SET_DEFAULT)
     place = models.CharField('Place', max_length = 120)
     date = models.DateTimeField('Event Date and Time')
     description = models.TextField('Details')

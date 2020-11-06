@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from counterapp.models import Category, NewsData, Message
+from counterapp.models import Category, NewsData, Message, EmployeeModel
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
 
 news_list = NewsData.objects.all().order_by('id').reverse()
 newsslide = NewsData.objects.all().order_by('date')[:5]
@@ -102,9 +103,14 @@ def adminauth(request):
         login(request, user)
         return redirect('adminloggedin')
 
-    if not user and username != 'jahir575':
+    if user and username != 'jahir575':
+        messages.add_message(request, messages.ERROR, "Your are not Authorised")
+        return redirect(request.META['HTTP_REFERER'])
+
+    if not user:
         messages.add_message(request, messages.ERROR, "Invalid Credentials")
         return redirect('adminlogin')
+
 @login_required
 def adminloggedin(request):
     context = {
@@ -118,13 +124,36 @@ def adminlogout(request):
     return redirect('home')
 
 def addemployee(request):
+    if request.method == 'GET':
+        return render(request, "pages/addemployee.html")
+    else:
+        try:
+            user = User.objects.create_user(username=request.POST["employeename"], password=request.POST['password'])
+            user.save()
+            employeeid = 'EMPID'+str(20000+user.id)
+            EmployeeModel(employee_id=employeeid, employee_name=request.POST["employeename"]).save()
+            return redirect(request.META['HTTP_REFERER'])
+        except IntegrityError:
+            messages.add_message(request,messages.ERROR, "User Already Exist")
+            return redirect(request.META['HTTP_REFERER'])
+        
+def employeelogin(request):
+    return render(request, 'pages/employeelogin.html')
+
+
+def employee_auth(request):
     employeename = request.POST['employeename']
     password = request.POST['password']
 
-    user = User.objects.create_user(username=employeename, password=password)
-    employeeid = 'EMPID'+str(200000+user.id)
-    EmployeeModel(employee_id=employeeid, employee_name=employeename).save()
-    return redirect(request.META['HTTP_REFERRER'])
+    user = authenticate(username=employeename, password=password)
 
-
-
+    if user:
+        login(request, user)
+        return redirect('loggedin_employee')
+    
+    if not user:
+        messages.add_message(request, messages.ERROE, "Wrong Credentials")
+        return redirect(request.META['HTTP_REFERER'])
+@login_required
+def loggedin_employee(request):
+    return render(request, 'pages/loggedin_employee.html')

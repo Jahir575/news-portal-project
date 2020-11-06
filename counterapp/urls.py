@@ -28,7 +28,10 @@ urlpatterns = [
     path('adminauth/', views.adminauth, name = 'adminauth'),
     path('adminloggedin/', views.adminloggedin, name = 'adminloggedin'),
     path('adminlogout/', views.adminlogout, name = 'adminlogout'),
-    path('addemployee/', views.addemployee, name='addemployee')
+    path('addemployee/', views.addemployee, name='addemployee'),
+    path('employeelogin/', views.employeelogin, name='employeelogin'),
+    path('employee_auth/', views.employee_auth, name='employee_auth'),
+    path('loggedin_employee/', views.loggedin_employee, name = 'loggedin_employee'),
 
 ]
 

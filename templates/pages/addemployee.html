@@ -1,12 +1,14 @@
 {% extends 'pages/base.html' %}
 {% block content %}
 
-<form class="form-control" method="POST" action="addemployee">
+<form method="POST" action="/addemployee/">
     {% csrf_token %}
-    <input type="text" name="employeeid" placeholder="Employee Id">
     <input type="text" name="employeename" placeholder="Employee Name">
     <input type="password" name="password" placeholder="Password">
     <input type="submit" value="Submit">
 </form>
 
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
 {% endblock %}
